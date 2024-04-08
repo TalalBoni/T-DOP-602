@@ -3,16 +3,16 @@ jenkins:
   securityRealm:
     allowSignup: false
   users:
-    - id: "Hugom"
+    - id: "chocolateen"
       password: ${USER_CHOCOLATEEN_PASSWORD}
       fullName: "Hugo"
-    - id: "Garancem"
+    - id: "vaugie_g"
       password: ${USER_VAUGIE_G_PASSWORD}
       fullName: "Garance"
-    - id: "Jeremy"
+    - id: "i_dont_know"
       password: ${USER_I_DONT_KNOW_PASSWORD}
       fullName: "Jeremy"
-    - id: "Nassimm"
+    - id: "nasso"
       password: ${USER_NASSO_PASSWORD}
       fullName: "Nassim"
   authorizationStrategy:
