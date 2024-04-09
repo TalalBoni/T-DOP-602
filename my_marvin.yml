@@ -15,7 +15,7 @@ jenkins:
     - id: "nasso"
       password: ${USER_NASSO_PASSWORD}
       name: "Nassim"
- authorizationStrategy:
+  authorizationStrategy:
     roleBased:
       roles:
         - name: "admin"
@@ -49,36 +49,36 @@ jenkins:
             - "Job/Read"
           assignments:
             - "Nassim"
-folders:
-  - name: "Tools"
-    description: "Folder for miscellaneous tools."
-jobs:
-  - script: |
-      folder('Tools') {
-        displayName('clone-repository')
-        parameters {
-          string(name: 'GIT_REPOSITORY_URL', description: 'Git URL of the repository to clone')
+  folders:
+    - name: "Tools"
+      description: "Folder for miscellaneous tools."
+  jobs:
+    - script: |
+        folder('Tools') {
+          displayName('clone-repository')
+          parameters {
+            string(name: 'GIT_REPOSITORY_URL', description: 'Git URL of the repository to clone')
+          }
+          steps {
+            shell('git clone ${params.GIT_REPOSITORY_URL}')
+            cleanWs()
+          }
+          disabled(false)
+          properties([])
+          triggers([])
         }
-        steps {
-          shell('git clone ${params.GIT_REPOSITORY_URL}')
-          cleanWs()
+    - script: |
+        folder('Tools') {
+          displayName('SEED')
+          parameters {
+            string(name: 'GITHUB_NAME', description: 'GitHub repository owner/repo_name')
+            string(name: 'DISPLAY_NAME', description: 'Display name for the job')
+          }
+          steps {
+            jobDsl(targets: ['job_dsl.groovy'])
+            cleanWs()
+          }
+          disabled(false)
+          properties([])
+          triggers([])
         }
-        disabled(false)
-        properties([])
-        triggers([])
-      }
-  - script: |
-      folder('Tools') {
-        displayName('SEED')
-        parameters {
-          string(name: 'GITHUB_NAME', description: 'GitHub repository owner/repo_name')
-          string(name: 'DISPLAY_NAME', description: 'Display name for the job')
-        }
-        steps {
-          jobDsl(targets: ['job_dsl.groovy'])
-          cleanWs()
-        }
-        disabled(false)
-        properties([])
-        triggers([])
-      }
